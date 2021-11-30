@@ -1,0 +1,24 @@
+import { ReactElement } from "react";
+
+export interface ProductCardProps {
+    product: Product,
+    children?: ReactElement | ReactElement[];
+}
+
+export interface Product {
+    id: string;
+    title: string;
+    img?: string
+}
+
+export interface ProductContexProps {
+    counter:number;
+    increasBy: (value:number)=>void;
+    product: Product;
+}
+
+
+export interface ProductCardHOCProps {
+    ({ product, children }: ProductCardProps) : JSX.Element,
+    
+}
