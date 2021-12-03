@@ -11,32 +11,17 @@ export const useShoppingCart = () => {
         
          setShoppingCart(oldShoppinCart => {
 
-            const productInCard: ProductInCart = oldShoppinCart[product.id] || {...product, count:0};
+            if (count === 0) {
 
-            if(Math.max(productInCard.count + count,0)>0){
-                productInCard.count += count;
+                const { [product.id]: toDelete, ...rest } = oldShoppinCart;
                 return {
-                    ...oldShoppinCart,
-                    [product.id]:productInCard
+                    ...rest
                 }
             }
 
-            // Borrar 
-
-            const {[product.id]:toDelete, ...rest} = oldShoppinCart;
-            return rest;
-
-            // if (count === 0) {
-
-            //     const { [product.id]: toDelete, ...rest } = oldShoppinCart;
-            //     return {
-            //         ...rest
-            //     }
-            // }
-
-            // return {
-            //     ...oldShoppinCart, [product.id]: { ...product, count }
-            // }
+            return {
+                ...oldShoppinCart, [product.id]: { ...product, count }
+            }
         });
 
 
