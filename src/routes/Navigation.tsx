@@ -4,6 +4,7 @@ import {
   Route,
   NavLink
 } from 'react-router-dom';
+import { Register } from '../03-forms/pages/Register';
 
 import logo from '../logo.svg';
 
@@ -15,7 +16,7 @@ export const Navigation = () => {
             <img src={ logo } alt="React Logo" />
           <ul>
             <li>
-              <NavLink to="/" activeClassName="nav-active" exact>Home</NavLink>
+              <NavLink to="/register" activeClassName="nav-active" exact>Register</NavLink>
             </li>
             <li>
               <NavLink to="/about" activeClassName="nav-active" exact>About</NavLink>
@@ -29,8 +30,8 @@ export const Navigation = () => {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <h1>About</h1>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route path="/users">
             <h1>Users</h1>
