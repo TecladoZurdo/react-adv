@@ -1,26 +1,19 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
+import { useForm } from '../hooks/useForm';
 import '../styles/styles.css';
 
 export const Register = () => {
 
-    const [registerData, setRegisterData] = useState({
+    const { name, email, password1, password2, onChange, reset, isValidEmail } = useForm({
         name: '',
         email: '',
         password1: '',
         password2: ''
     });
 
-    const { name, email, password1, password2 } = registerData;
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setRegisterData(pre => {
-            return { ...pre, [event.target.name]: event.target.value }
-        })
-    }
-
-    const onSubmit = (event:FormEvent<HTMLFormElement>)=>{
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(registerData);
     }
 
     return (
@@ -30,12 +23,15 @@ export const Register = () => {
                 <input type="text" placeholder="Name"
                     value={name}
                     onChange={onChange}
-                    name="name" />
+                    name="name"
+                    className={`${name.trim().length <= 0 && 'has-error'}`} />
+                {name.trim().length <= 0 && <span>Este es campo es necesario</span>}
                 <input type="email"
                     placeholder="Email"
                     value={email}
                     onChange={onChange}
                     name="email" />
+                {!isValidEmail(email) && <span>No es un email valido</span>}
                 <input type="password"
                     placeholder="Password"
                     value={password1}
@@ -46,6 +42,7 @@ export const Register = () => {
                     value={password2}
                     onChange={onChange}
                     name="password2" />
+                <button type="reset" onClick={reset}> Reset</button>
                 <button type="submit"> Submit</button>
             </form>
         </div>
